@@ -7,6 +7,7 @@ Using the save configuration event will create a new save_points.c file containi
 If the event is not used, the default structure will be used
 
 ![image](https://github.com/user-attachments/assets/dfb79afd-3435-4270-9775-9a7488dca526)
+![image](https://github.com/user-attachments/assets/e30eed80-2cc4-4216-850c-c76b6abc2ef0)
 ![image](https://github.com/user-attachments/assets/df098de2-9883-4bf3-87af-5dd2b4d37134)
 
 New event: Store Variable from Game Data In Variable by Index
