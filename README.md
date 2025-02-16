@@ -16,3 +16,6 @@ use this event instead of the default one.
 ![image](https://github.com/user-attachments/assets/0790c332-7aca-42fa-a01c-73eb49417610)
 
 The Game Data Load and Game Data Save works just as before with or without a custom save configuration.
+
+Q- When should I use this plugin?
+A- If you are using a large part of the SRAM for something else (like using the metatile plugin) this will allows to optimize space for the save data without conflicting with it.
