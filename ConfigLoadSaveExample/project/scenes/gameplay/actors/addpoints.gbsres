@@ -1,0 +1,44 @@
+{
+  "_resourceType": "actor",
+  "id": "50bd93dd-d180-44f4-baed-a9c6a0478b64",
+  "name": "AddPoints",
+  "frame": 0,
+  "animate": false,
+  "spriteSheetId": "581d34d0-9591-4e6e-a609-1d94f203b0cd",
+  "prefabId": "",
+  "direction": "left",
+  "moveSpeed": 1,
+  "animSpeed": 15,
+  "paletteId": "",
+  "isPinned": false,
+  "persistent": false,
+  "collisionGroup": "",
+  "collisionExtraFlags": [],
+  "prefabScriptOverrides": {},
+  "symbol": "actor_9",
+  "script": [
+    {
+      "command": "EVENT_INC_VALUE",
+      "args": {
+        "variable": "0"
+      },
+      "id": "b881f451-c294-422b-8cb7-c36457092c75"
+    },
+    {
+      "command": "EVENT_CALL_CUSTOM_EVENT",
+      "args": {
+        "customEventId": "9df20dcc-ba0c-41e7-9eb8-beacc8e24f06"
+      },
+      "id": "1d82934a-6079-4471-be05-12ac6aed7b75"
+    }
+  ],
+  "startScript": [],
+  "updateScript": [],
+  "hit1Script": [],
+  "hit2Script": [],
+  "hit3Script": [],
+  "coordinateType": "tiles",
+  "x": 15,
+  "y": 9,
+  "_index": 9
+}

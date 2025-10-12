@@ -1,0 +1,12 @@
+{
+  "_resourceType": "background",
+  "id": "09556d9a-6114-4461-a440-271189dc74c6",
+  "name": "Gameplay",
+  "symbol": "bg_gameplay",
+  "tileColors": "",
+  "filename": "Gameplay.png",
+  "width": 20,
+  "height": 18,
+  "imageWidth": 160,
+  "imageHeight": 144
+}

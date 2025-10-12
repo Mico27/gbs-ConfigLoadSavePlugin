@@ -1,0 +1,56 @@
+{
+  "_resourceType": "variables",
+  "variables": [
+    {
+      "id": "0",
+      "name": "PointAmount",
+      "symbol": "var_pointamount"
+    },
+    {
+      "id": "1",
+      "name": "ToggleAmount",
+      "symbol": "var_toggleamount"
+    },
+    {
+      "id": "2",
+      "name": "PointAmountBank1",
+      "symbol": "var_pointamountbank1"
+    },
+    {
+      "id": "3",
+      "name": "PointAmountBank2",
+      "symbol": "var_pointamountbank2"
+    },
+    {
+      "id": "4",
+      "name": "PointAmountBank3",
+      "symbol": "var_pointamountbank3"
+    },
+    {
+      "id": "5",
+      "name": "ToggleAmountBank1",
+      "symbol": "var_toggleamountbank1"
+    },
+    {
+      "id": "6",
+      "name": "ToggleAmountBank2",
+      "symbol": "var_toggleamountbank2"
+    },
+    {
+      "id": "7",
+      "name": "ToggleAmountBank3",
+      "symbol": "var_toggleamountbank3"
+    },
+    {
+      "id": "8",
+      "name": "CurrentSaveBank",
+      "symbol": "var_currentsavebank"
+    },
+    {
+      "id": "9",
+      "name": "ToggleFlags",
+      "symbol": "var_toggleflags"
+    }
+  ],
+  "constants": []
+}

@@ -1,0 +1,56 @@
+{
+  "_resourceType": "actor",
+  "id": "375fab37-bf88-4256-a46e-283df6f83ee5",
+  "name": "Toggle",
+  "frame": 0,
+  "animate": false,
+  "spriteSheetId": "581d34d0-9591-4e6e-a609-1d94f203b0cd",
+  "prefabId": "c2becd8c-9865-4a4e-8a1f-fae97a408e1c",
+  "direction": "down",
+  "moveSpeed": 1,
+  "animSpeed": 15,
+  "paletteId": "",
+  "isPinned": false,
+  "persistent": false,
+  "collisionGroup": "",
+  "collisionExtraFlags": [],
+  "prefabScriptOverrides": {
+    "45fbce2e-3668-4361-b494-97a273f14933": {
+      "id": "45fbce2e-3668-4361-b494-97a273f14933",
+      "args": {
+        "flag": 7
+      }
+    },
+    "fd66400b-51a4-4037-a866-c22112c88661": {
+      "id": "fd66400b-51a4-4037-a866-c22112c88661",
+      "args": {
+        "flag8": true,
+        "flag1": false
+      }
+    },
+    "193ff3d4-e248-4b1c-9b38-eab0ae7b71b1": {
+      "id": "193ff3d4-e248-4b1c-9b38-eab0ae7b71b1",
+      "args": {
+        "flag": 7
+      }
+    },
+    "cc66c097-c040-496b-820b-9c6fd71451c9": {
+      "id": "cc66c097-c040-496b-820b-9c6fd71451c9",
+      "args": {
+        "flag8": true,
+        "flag1": false
+      }
+    }
+  },
+  "symbol": "actor_7",
+  "script": [],
+  "startScript": [],
+  "updateScript": [],
+  "hit1Script": [],
+  "hit2Script": [],
+  "hit3Script": [],
+  "coordinateType": "tiles",
+  "x": 15,
+  "y": 14,
+  "_index": 7
+}

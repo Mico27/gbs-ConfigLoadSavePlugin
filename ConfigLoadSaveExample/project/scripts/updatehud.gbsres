@@ -1,0 +1,21 @@
+{
+  "_resourceType": "script",
+  "id": "9df20dcc-ba0c-41e7-9eb8-beacc8e24f06",
+  "name": "UpdateHud",
+  "description": "",
+  "variables": {},
+  "actors": {},
+  "symbol": "script_1",
+  "script": [
+    {
+      "command": "EVENT_TEXT_DRAW",
+      "args": {
+        "text": "Points:        %D5$00$\nToggles:         %D1$01$/8",
+        "x": 0,
+        "y": 0,
+        "location": "overlay"
+      },
+      "id": "9c2612dd-6a03-468f-bfed-44670b23822e"
+    }
+  ]
+}

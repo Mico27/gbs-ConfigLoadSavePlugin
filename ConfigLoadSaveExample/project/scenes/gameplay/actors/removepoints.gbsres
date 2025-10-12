@@ -1,0 +1,44 @@
+{
+  "_resourceType": "actor",
+  "id": "0c3095c2-a09f-47e5-962e-42e810674780",
+  "name": "RemovePoints",
+  "frame": 0,
+  "animate": false,
+  "spriteSheetId": "581d34d0-9591-4e6e-a609-1d94f203b0cd",
+  "prefabId": "",
+  "direction": "right",
+  "moveSpeed": 1,
+  "animSpeed": 15,
+  "paletteId": "",
+  "isPinned": false,
+  "persistent": false,
+  "collisionGroup": "",
+  "collisionExtraFlags": [],
+  "prefabScriptOverrides": {},
+  "symbol": "actor_8",
+  "script": [
+    {
+      "command": "EVENT_DEC_VALUE",
+      "args": {
+        "variable": "0"
+      },
+      "id": "8f3902ba-9bd0-4059-821d-cd6179fd0d39"
+    },
+    {
+      "command": "EVENT_CALL_CUSTOM_EVENT",
+      "args": {
+        "customEventId": "9df20dcc-ba0c-41e7-9eb8-beacc8e24f06"
+      },
+      "id": "dd849df4-6ffb-4c2d-a4c9-6b3652975971"
+    }
+  ],
+  "startScript": [],
+  "updateScript": [],
+  "hit1Script": [],
+  "hit2Script": [],
+  "hit3Script": [],
+  "coordinateType": "tiles",
+  "x": 3,
+  "y": 9,
+  "_index": 8
+}
