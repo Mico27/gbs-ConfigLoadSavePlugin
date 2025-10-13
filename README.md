@@ -1,6 +1,8 @@
 # gbs-ConfigLoadSavePlugin
  GBS Plugin that allows configuration of the game saving structure
 
+ NOTE: this plugin and example project was updated for the latest v4.2 dev build (the plugin should still work for 4.1)
+
 New events Save configuration
 Allows to specify an array of variable that will be used in the save structure instead of the default one.
 Using the save configuration event will create a new save_points.c file containing the specified variables.
