@@ -61,7 +61,7 @@
             "args": {
               "x": 0,
               "y": 18,
-              "speed": 0,
+              "speed": -3,
               "__collapse": true
             },
             "id": "33b32005-5e69-4e07-952f-5e00334f564f"
@@ -257,7 +257,7 @@
                   "args": {
                     "x": 0,
                     "y": 0,
-                    "speed": 0,
+                    "speed": -3,
                     "__collapse": true
                   },
                   "id": "99ab0161-d4ba-4bec-a44a-446a3e0d0c50"
