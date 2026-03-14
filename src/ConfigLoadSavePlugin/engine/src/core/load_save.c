@@ -23,7 +23,7 @@ extern const UINT32 save_signature;
 #if __has_include ("data/save_points.h")
 #include "data/save_points.h"
 #else
-	
+
 typedef struct save_point_t {
     void * target;
     size_t size;
@@ -36,7 +36,6 @@ typedef struct save_point_t {
 extern uint16_t __rand_seed;
 
 const save_point_t save_points[] = {
-	
     // variables (must be first, need for peeking)
     SAVEPOINT(script_memory, 0),
     // VM contexts
@@ -57,7 +56,6 @@ const save_point_t save_points[] = {
     SAVEPOINT(actors_active_head, 18), SAVEPOINT(actors_inactive_head, 19), SAVEPOINT(player_moving, 20), SAVEPOINT(player_collision_actor, 21),
     // system
     SAVEPOINT(__rand_seed, 22),
-	
     // terminator
     SAVEPOINTS_END
 };
@@ -74,25 +72,25 @@ void data_init(void) BANKED {
     SWITCH_RAM_BANK(1, RAM_BANKS_ONLY);
     // calculate save blob size
     save_blob_size = sizeof(save_signature) + sizeof(save_blob_size);
-	#if __has_include ("data/save_points.h")
-	save_point_t point_ref;
-	const save_point_t * point_ptr = save_points;
-	MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
-	while(point_ref.target){
-		save_blob_size += sizeof(point_ref.size) + sizeof(point_ref.id) + point_ref.size;
-		point_ptr++;
-		MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
-	}	
-	#else
+    #if __has_include ("data/save_points.h")
+    save_point_t point_ref;
+    const save_point_t * point_ptr = save_points;
+    MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
+    while(point_ref.target){
+        save_blob_size += sizeof(point_ref.size) + sizeof(point_ref.id) + point_ref.size;
+        point_ptr++;
+        MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
+    }	
+    #else
     for(const save_point_t * point = save_points; (point->target); point++) {
         save_blob_size += sizeof(point->size) + sizeof(point->id) + point->size;
     }
-	#endif
+    #endif
 #ifdef BATTERYLESS
     // load from FLASH ROM
     for (UBYTE i = 0; i < SRAM_BANKS_TO_SAVE; i++) restore_sram_bank(i);
 #endif
-	SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
+    SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
 }
 
 UBYTE * data_slot_address(UBYTE slot, UBYTE *bank) {
@@ -119,7 +117,7 @@ void data_save(UBYTE slot) BANKED {
     // size of the save blob
     *(size_t*)save_data = save_blob_size;
     save_data += sizeof(save_blob_size);
-	#if __has_include ("data/save_points.h")
+    #if __has_include ("data/save_points.h")
 	save_point_t point_ref;
 	const save_point_t * point_ptr = save_points;
 	MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
@@ -148,23 +146,26 @@ void data_save(UBYTE slot) BANKED {
         memcpy(save_data, point->target, point->size);
         save_data += point->size;
     }
-	#endif
+    #endif
 #ifdef BATTERYLESS
     // save to FLASH ROM
     save_sram(SRAM_BANKS_TO_SAVE);
 #endif
-	SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
+    SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
 }
 
 UBYTE data_load(UBYTE slot) BANKED {
     UBYTE data_bank, *save_data = data_slot_address(slot, &data_bank);
     if (save_data == NULL) return FALSE;
     SWITCH_RAM_BANK(data_bank, RAM_BANKS_ONLY);
-    if (SIGN_BY_PTR(save_data) != save_signature) return FALSE;
+    if (SIGN_BY_PTR(save_data) != save_signature){
+        SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
+        return FALSE;
+    }
     // seek to the first block
     save_data += sizeof(save_signature) + sizeof(save_blob_size);
     // load blocks
-	#if __has_include ("data/save_points.h")
+    #if __has_include ("data/save_points.h")
 	save_point_t point_ref;
 	const save_point_t * point_ptr = save_points;
 	MemcpyBanked(&point_ref, point_ptr, sizeof(save_point_t), BANK(save_points));
@@ -182,15 +183,25 @@ UBYTE data_load(UBYTE slot) BANKED {
 	#else
     for(const save_point_t * point = save_points; (point->target); point++) {
         // check chunk size
-        if (*(size_t*)save_data != point->size) return FALSE; else save_data += sizeof(point->size);
+        if (*(size_t*)save_data != point->size){
+            SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
+            return FALSE; 
+        } else {
+            save_data += sizeof(point->size);
+        }
         // check chunk id
-        if (*(uint8_t*)save_data != point->id) return FALSE; else save_data += sizeof(point->id);
+        if (*(uint8_t*)save_data != point->id){
+            SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
+            return FALSE; 
+        } else {
+            save_data += sizeof(point->id);
+        }
         // copy chunk data
         memcpy(point->target, save_data, point->size);
         save_data += point->size;
     }
-	#endif
-	SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
+    #endif
+    SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
     // Restart music
     if (music_current_track_bank != MUSIC_STOP_BANK) {
         music_next_track = music_current_track;
@@ -209,16 +220,19 @@ void data_clear(UBYTE slot) BANKED {
     // save to FLASH ROM
     save_sram(SRAM_BANKS_TO_SAVE);
 #endif
-	SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
+    SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
 }
 
 UBYTE data_peek(UBYTE slot, UINT16 idx, UWORD count, UINT16 * dest) BANKED {
     UBYTE data_bank, *save_data = data_slot_address(slot, &data_bank);
     if (save_data == NULL) return FALSE;
     SWITCH_RAM_BANK(data_bank, RAM_BANKS_ONLY);
-    if (SIGN_BY_PTR(save_data) != save_signature) return FALSE;
+    if (SIGN_BY_PTR(save_data) != save_signature){
+        SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
+        return FALSE;
+    }
     if (count) memcpy(dest, save_data + (sizeof(save_signature) + sizeof(save_blob_size) + sizeof(size_t) + sizeof(uint8_t)) + (idx << 1), count << 1);
-	SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
+    SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
     return TRUE;
 }
 
@@ -226,7 +240,10 @@ UBYTE data_peek_ex(UBYTE slot, UINT16 idx, UWORD count, UINT16 * dest) BANKED {
     UBYTE data_bank, *save_data = data_slot_address(slot, &data_bank);
     if (save_data == NULL) return FALSE;
     SWITCH_RAM_BANK(data_bank, RAM_BANKS_ONLY);
-    if (SIGN_BY_PTR(save_data) != save_signature) return FALSE;
+    if (SIGN_BY_PTR(save_data) != save_signature){
+        SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
+        return FALSE;
+    }
     if (count) memcpy(dest, save_data + (sizeof(save_signature) + sizeof(save_blob_size) + (((idx + 1) * (sizeof(size_t) + sizeof(uint8_t) + sizeof(int16_t))) - sizeof(int16_t))), count << 1);
 	SWITCH_RAM_BANK(0, RAM_BANKS_ONLY);
     return TRUE;
