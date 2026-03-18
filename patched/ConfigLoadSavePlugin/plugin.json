@@ -13,44 +13,6 @@
       "when": {
         "additionalPlugins": [
           "Mico27/MetaTilePlugin",
-          "Mico27/SceneStackExPlugin",
-          "Mico27/FadeStreetPlugin"
-        ]
-      },
-      "use": "M_Sce_F"
-    },
-    {
-      "when": {
-        "additionalPlugins": [
-          "MetaTilePlugin",
-          "SceneStackExPlugin",
-          "FadeStreetPlugin"
-        ]
-      },
-      "use": "M_Sce_F"
-    },
-    {
-      "when": {
-        "additionalPlugins": [
-          "Mico27/MetaTilePlugin",
-          "Mico27/FadeStreetPlugin"
-        ]
-      },
-      "use": "M_F"
-    },
-    {
-      "when": {
-        "additionalPlugins": [
-          "MetaTilePlugin",
-          "FadeStreetPlugin"
-        ]
-      },
-      "use": "M_F"
-    },
-    {
-      "when": {
-        "additionalPlugins": [
-          "Mico27/MetaTilePlugin",
           "Mico27/SceneStackExPlugin"
         ]
       },
@@ -64,40 +26,6 @@
         ]
       },
       "use": "M_Sce"
-    },
-    {
-      "when": {
-        "additionalPlugins": [
-          "Mico27/SceneStackExPlugin",
-          "Mico27/FadeStreetPlugin"
-        ]
-      },
-      "use": "Sce_F"
-    },
-    {
-      "when": {
-        "additionalPlugins": [
-          "SceneStackExPlugin",
-          "FadeStreetPlugin"
-        ]
-      },
-      "use": "Sce_F"
-    },
-    {
-      "when": {
-        "additionalPlugins": [
-          "Mico27/FadeStreetPlugin"
-        ]
-      },
-      "use": "F"
-    },
-    {
-      "when": {
-        "additionalPlugins": [
-          "FadeStreetPlugin"
-        ]
-      },
-      "use": "F"
     },
     {
       "when": {
