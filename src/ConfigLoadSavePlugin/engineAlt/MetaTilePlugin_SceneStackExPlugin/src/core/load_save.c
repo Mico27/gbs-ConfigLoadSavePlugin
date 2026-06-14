@@ -250,7 +250,10 @@ UBYTE data_peek_ex(UBYTE slot, UINT16 idx, UWORD count, UINT16 * dest) BANKED {
 }
 
 void vm_data_peek_ex(SCRIPT_CTX * THIS) OLDCALL BANKED {
-    data_peek_ex(*(uint8_t *)VM_REF_TO_PTR(FN_ARG0), *(uint16_t *)VM_REF_TO_PTR(FN_ARG1), *(uint16_t *)VM_REF_TO_PTR(FN_ARG2), &script_memory[*(int16_t*)VM_REF_TO_PTR(FN_ARG3)]);
+    int16_t idx = *(int16_t*)VM_REF_TO_PTR(FN_ARG3);
+    int16_t * A;
+    if (idx < 0) A = THIS->stack_ptr + idx - 4; else A = script_memory + idx;
+    data_peek_ex(*(uint8_t *)VM_REF_TO_PTR(FN_ARG0), *(uint16_t *)VM_REF_TO_PTR(FN_ARG1), *(uint16_t *)VM_REF_TO_PTR(FN_ARG2), A);
 }
 
 void vm_data_save_ex(SCRIPT_CTX * THIS) OLDCALL BANKED {
