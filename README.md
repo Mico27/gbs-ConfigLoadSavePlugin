@@ -25,6 +25,7 @@ A GB Studio engine plugin that lets you define exactly which script variables ar
 4. [Technicalities and Restrictions](#technicalities-and-restrictions)
 5. [Events Reference](#events-reference)
 6. [Inner Workings](#inner-workings)
+7. [Memory Footprint](#memory-footprint)
 
 ---
 
@@ -283,3 +284,18 @@ void vm_data_peek_ex(SCRIPT_CTX * THIS) OLDCALL BANKED {
 }
 ```
 
+
+---
+
+## Memory Footprint
+
+Measured against the stock GB Studio **4.3.0-e1** engine (per-file SDCC compile with GB Studio's build flags, default engine settings). Values are the plugin's *delta* versus the stock engine; DMG build, with CGB noted where it differs. ROM cost lands in banked ROM (GB Studio's autobanker spreads it across switchable banks); using the plugin's events additionally compiles a few bytes of GBVM script per call into your project's script banks.
+
+| | Cost |
+|---|---|
+| WRAM | +0 bytes |
+| ROM | +455 bytes |
+
+- **WRAM:** no change — the plugin only replaces the stock `load_save.c` save-point table and slot addressing.
+- **Engine WRAM headroom:** the stock GB Studio 4.3.0 engine leaves about **854 bytes** of WRAM free (usable engine WRAM is 7,776 bytes at 0xC0A0–0xDF00; the stock engine uses 6,922 bytes). With this plugin installed roughly **854 bytes** remain. This figure does not depend on how many global variables your project defines: the script memory array has a fixed size of VM_HEAP_SIZE + (VM_MAX_CONTEXTS × VM_CONTEXT_STACK_SIZE) words — 768 + 16 × 64 = 1,792 words (3,584 bytes) with stock engine settings.
+- **SRAM:** yes — this plugin *is* the save system. Save slots are relocated from SRAM bank 0 to banks 1–3 (bank 0 is left untouched so SRAM-hungry plugins like MetaTilePlugin/SceneStackExPlugin can coexist). Each save blob contains only the variables you list in the Save Config event, so slots are far smaller than stock save-states; the exact size is your variable list plus a few bytes of header per entry.
