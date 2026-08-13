@@ -1,0 +1,23 @@
+{
+  "_resourceType": "scene",
+  "id": "1ab4ae16-7f42-4669-9326-3f550513746c",
+  "_index": 4,
+  "name": "POINTNCLICK",
+  "backgroundId": "1e5f9d6a-bdbc-43e6-8c34-22f5bb5dea05",
+  "tilesetId": "",
+  "width": 20,
+  "height": 18,
+  "type": "POINTNCLICK",
+  "colorModeOverride": "none",
+  "paletteIds": [],
+  "spritePaletteIds": [],
+  "collisions": "",
+  "autoFadeSpeed": 1,
+  "symbol": "scene_pointnclick",
+  "x": 1140,
+  "y": 100,
+  "script": [],
+  "playerHit1Script": [],
+  "playerHit2Script": [],
+  "playerHit3Script": []
+}
