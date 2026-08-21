@@ -1064,7 +1064,7 @@
             "children": {
               "true0": [
                 {
-                  "command": "EVENT_LOAD_DATA_EX",
+                  "command": "EVENT_LOAD_DATA",
                   "args": {
                     "saveSlot": 0
                   },
@@ -1073,7 +1073,7 @@
               ],
               "true1": [
                 {
-                  "command": "EVENT_LOAD_DATA_EX",
+                  "command": "EVENT_LOAD_DATA",
                   "args": {
                     "saveSlot": 1
                   },
@@ -1082,7 +1082,7 @@
               ],
               "true2": [
                 {
-                  "command": "EVENT_LOAD_DATA_EX",
+                  "command": "EVENT_LOAD_DATA",
                   "args": {
                     "saveSlot": 2
                   },
