@@ -73,7 +73,7 @@ Both the signature and the size are checked on load. A save that does not match 
 ## Project Setup
 
 1. Copy the plugin folder into your project's `plugins` folder.
-2. Compatibility variants ship for **MetaTilePlugin**, **SceneStackExPlugin**, **RpgMaker2KPlugin** and any combination of them, and GB Studio picks the right one. The plugin loads early so that plugins changing the same engine files build on top of its version.
+2. Compatibility variants ship for **MetaTilePlugin** and **SceneStackExPlugin**, alone or together, and GB Studio picks the right one. The plugin loads early so that plugins changing the same engine files build on top of its version.
 3. Pick **Save structure** under **Settings**, then **Engine**, then **Configure Load/Save**:
    - **Full save-state** is GB Studio's own structure and the default. Nothing changes.
    - **All variables only** saves every global variable and nothing else. No event needed.
@@ -178,12 +178,6 @@ Compatibility variants raise the first bank used to protect the other plugin's d
 | MetaTilePlugin | 1, because bank 0 holds its map and collision data |
 | SceneStackExPlugin | 1, because bank 0 holds its scene stack |
 | Both | 2, because banks 0 and 1 are taken |
-| RpgMaker2KPlugin | the bank after its own **SRAM bank** setting, which holds all its party and battle data. That plugin refuses to build unless its bank clears whatever else is installed |
-
-With RpgMaker2KPlugin installed, a save slot also carries its party block, holding
-the party, inventory, money and hero stats, written after the variables and read
-back on load whichever **Save structure** is chosen. Its save menu reads a slot's
-party through the same block without opening the file.
 
 > Moving **Starting SRAM bank** relocates every slot. Existing save data is not moved with it, so the game stops finding it. Changing **Save slot count** is safe, because slots keep their addresses and the count only decides where the range stops.
 
@@ -362,8 +356,8 @@ Moving **Starting SRAM bank** relocates every file and the old data is left behi
 **Save slot count** is safe, since files keep their addresses.
 
 **Can I use this with the MetaTile or SceneStackEx plugins, which also need save memory?**
-Yes. Compatibility variants ship for both and for RpgMaker2K, and they push the save files past
-whatever memory the other plugin owns.
+Yes. Compatibility variants ship for both, and they push the save files past whatever memory the
+other plugin owns.
 
 **My build failed complaining about Save configuration.**
 The setting and the event have to agree. **Custom variable set** needs a **Save configuration**
@@ -410,14 +404,6 @@ Grouped by the date each change was merged into the official
 
 Only bug fixes, new features and feature changes are listed. Engine version
 bumps, patch regeneration, packaging fixes and documentation edits are omitted.
-
-### 2026-08-27
-
-- Added RpgMaker2KPlugin compatibility, including combinations with MetaTile and
-  SceneStackEx. That plugin also replaces the save and load code and loads before this
-  one, so the variants here carry its party block into the save file and its save menu
-  reader, and start the files after the memory bank it lives in. Every **Save structure**,
-  **Save slot count** and **Starting SRAM bank** setting keeps working as it does alone.
 
 ### 2026-08-21
 
